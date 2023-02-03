@@ -78,7 +78,7 @@ There are packages, such as [Pipe][pipe] take the similar approach. It treats pi
 
 ## FAQ
 
-Q: I want to assign value to the first argument
+Q: I need to assign value to the first argument
 A: use `functools.partial` to wrap your function first
 
 ```python
@@ -90,8 +90,8 @@ base2 = Pipe(partial(pow, base=2))
 ```
 
 - Q: I want to create open pipe
-- A: `Pipe` only create closed pipe, ie. execute the function when chaining with the `|` operator. You may consider other solutions such as:
-  - [pipe][pipe], which create open pipe for iterators since version 2
+- A: `Pipe` only create closed pipe, ie. execute the function after piping with the `|` operator. You may consider other solutions such as:
+  - [pipe][pipe], which create open pipe for iterators
   - [Coconut][coconut], a python variant that embrace functional programming
 
 ## Need Help?

@@ -1,9 +1,8 @@
 from pipable import Pipe
-from pytest import ExceptionInfo
 import pytest
 
 
-# ===== constants ======
+# ===== fixture ======
 @Pipe
 def pow_pipe(base: int, exp: int) -> int:
     """func to test decorator"""

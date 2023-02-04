@@ -1,4 +1,23 @@
 #!/usr/bin/env python3
+"""Version Pump Automation
+
+- update pyproject.toml
+- run pytest and doctest
+- generate coverage report and github badges
+- update changelog
+- create new github commit, tag and release
+- publish new version to PyPi
+
+Examples: 
+    - dry run
+    ./pump.py patch
+    
+    - update pyproject.toml and local git tag
+    ./pump.py patch --tag 
+
+    - update everything and publish new version
+    ./pump.py patch --tag --publish
+"""
 
 import toml
 import argparse

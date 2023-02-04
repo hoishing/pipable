@@ -7,7 +7,7 @@ if [ "$1" != "now" ]; then
 fi
 
 # run test w/ coverage, abort publish if failed
-if ! coverage run -m pytest --doctest-modules pipable test_pipable.py; then
+if ! coverage run -m pytest --doctest-modules; then
   echo publish abort ⚠️
   exit 1
 fi

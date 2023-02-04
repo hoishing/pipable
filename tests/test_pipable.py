@@ -9,7 +9,7 @@ def pow_pipe(base: int, exp: int) -> int:
     return base**exp
 
 
-# ====== tests begin ========
+# ====== tests ========
 def test_builtn_with_single_arg():
     list_ = Pipe(list)
     assert "ab" | list_ == ["a", "b"]
@@ -18,13 +18,6 @@ def test_builtn_with_single_arg():
 def test_builtin_with_multiple_args():
     square = Pipe(pow, exp=2)
     assert 3 | square == 9
-
-
-def test_side_effect(capsys):
-    print_ = Pipe(print)
-    "a" | print_("b", "c")
-    stdout: str = capsys.readouterr().out
-    assert stdout.splitlines()[-1] == "a b c"
 
 
 def test_raise_by_assigning_1st_arg():
@@ -48,3 +41,23 @@ def test_decorated_with_multiple_args():
 def test_decorator_raise_assigning_first_arg():
     with pytest.raises(Exception):
         3 | pow_pipe(base=2)
+
+
+def test_wrap_with_partial():
+    base2 = Pipe(lambda x: pow(2, x))
+    assert 3 | base2 == 8
+
+
+def test_prepend_preceding(capsys):
+    prepend = Pipe(print, "b", "c")
+    "a" | prepend
+    stdout: str = capsys.readouterr().out
+    assert stdout.splitlines()[-1] == "a b c"
+
+
+def test_append_preceding(capsys):
+
+    append = Pipe(lambda x: print(1, 2, x))
+    3 | append
+    stdout: str = capsys.readouterr().out
+    assert stdout.splitlines()[-1] == "1 2 3"

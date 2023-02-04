@@ -1,3 +1,7 @@
+"""This package try to mimic pipe operation by overriding the bitwise-or operator, 
+turn it into an infix function that take the output of previous expression as the first argument of the current function.
+"""
+
 from typing import Callable, Any
 
 
@@ -5,7 +9,7 @@ def prepend_partial(func: Callable, /, *args, **keywords) -> Callable:
     """partial with arguments prepend to `args`
 
     Notes:
-        built-in `functools.parital` append arguments to `args`, see [docs][py-docs]
+        built-in `functools.parital` append arguments to `args`, see [docs](https://docs.python.org/3/library/functools.html#functools.partial)
 
     Examples:
         - compare with `functools.partial` using `pow`
@@ -39,13 +43,11 @@ def prepend_partial(func: Callable, /, *args, **keywords) -> Callable:
 
 
 class Pipe(object):
-    """create pipable function
+    """This class create the `Pipe` object that mimic pipe operation:
 
-    Turn the bitwise-or operator `|` into an infix function that accept the output of previous expression.
+    - instatiate by creating partial of existing function
+    - turn the bitwise-or operator `|` into an infix function that accept the output of previous expression.
     ie. pipe operator
-
-    Examples:
-        see [README.md#quick-start]
     """
 
     def __init__(self, func: Callable, *args, **kwargs) -> None:

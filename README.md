@@ -2,13 +2,13 @@
 
 > pseudo pipe operation in python
 
-[![CI][ci-badge]][ci-url] [![Coverage][coverage-badge]][coverage-url] [![MIT][MIT-badge]][MIT-url]
+[![ci-badge]][ci-url] [![coverage-badge]][coverage-url] [![pypi-badge]][pypi-url] [![py-version]][py-url] [![MIT-badge]][MIT-url] [![black-badge]][black-url]
 
 🔗 [source code](https://github.com/hoishing/pipable)
 
 ## Quick Start
 
-### Create Pipe Object
+### Create the Pipe Object
 
 - instantiate with the `Pipe` class
 
@@ -16,31 +16,31 @@
 from pipable import Pipe
 
 list_ = Pipe(list)
-"abc" | list_  # ["a", "b", "c"]
+"abc" | list_    # ["a", "b", "c"]
 ```
 
-#### Pipe Object is Partial
+#### Create Pipe Object Like Partial
 
-- provide argument values to create the partial like using built-in `functools.partial`
-- preceding output will assign to the first argument while calling
+- turn function into Pipe by providing argument values like using the built-in `functools.partial`
+- preceding output will be assigned to the first argument while piping
 
 ```python
 square = Pipe(pow, exp=2)
-3 | square  # 9
+3 | square    # 9
 ```
 
 Note that assigning value to the first argument will raise exception, as it is preserved for the preceding output.
 
 ```python
 base2 = Pipe(pow, base=2)
-3 | base2  # raise ⚠️
+3 | base2    # raise !!
 ```
 
 ### Using Decorator
 
-- transform function to Pipe obj with the `@Pipe` decorator
+- transform function to Pipe factory function with the `@Pipe` decorator
 - preceding output will be assigned to the first argument
-- create Pipe object by calling the function with non-first arguments
+- instantiate Pipe object like creating partial by skipping the first argument
 
 ```python
 # function with only one argument
@@ -48,7 +48,7 @@ base2 = Pipe(pow, base=2)
 def hi(name: str) -> str:
   return f"hi {name}"
 
-"May" | hi  # "hi May"
+"May" | hi    # "hi May"
 
 
 # function with multiple arguments
@@ -56,12 +56,12 @@ def hi(name: str) -> str:
 def power(base: int, exp: int) -> int:
   return a ** b
 
-# assign non-first argument to create Pipe obj
-2 | power(3)      # 8, first arg automatically skipped
-2 | power(exp=3)  # 8, explicit assign with keyword is better
+# instantiate Pipe obj by calling without the 1st argument
+2 | power(3)        # 8
+2 | power(exp=3)    # 8, better be more explicit with keyword
 
-# assign the 1st argument raise exception
-2 | power(base=3)  # raise ⚠️
+# assign the 1st argument will cause exception
+2 | power(base=3)    # raise !!
 ```
 
 ## Motivation
@@ -78,21 +78,39 @@ There are packages, such as [Pipe][pipe] take the similar approach. It treats pi
 
 ## FAQ
 
-Q: I need to assign value to the first argument
-A: use `functools.partial` to wrap your function first
+How can I assign value to the first argument?
+  
+Assign it within a wrapper function
 
 ```python
-from functools import partial
-from pipable import Pipe
-
-base2 = Pipe(partial(pow, base=2))
+base2 = Pipe(lambda x: pow(2, x))
 3 | base2  # 8
 ```
 
-- Q: I want to create open pipe
-- A: `Pipe` only create closed pipe, ie. execute the function after piping with the `|` operator. You may consider other solutions such as:
-  - [pipe][pipe], which create open pipe for iterators
-  - [Coconut][coconut], a python variant that embrace functional programming
+---
+
+Can I create open pipe?
+
+`Pipe` only create closed pipe, ie. execute the function after piping with the `|` operator. You may consider other solutions such as:
+
+- [pipe][pipe], which create open pipe for iterators
+- [Coconut][coconut], a python variant that embrace functional programming
+
+---
+
+Can I append the preceding output at the end of the argument list?
+
+Put the preceding output at the end using a wrapper function
+
+```python
+# prepend is the default behaviour
+prepend = Pipe(print, 'b', 'c')
+'a' | prepend    # 'a b c'
+
+# use wrapper if you need append
+append = Pipe(lambda x: print(1, 2, x))
+3 | append    # '1 2 3'
+```
 
 ## Need Help?
 
@@ -104,5 +122,11 @@ Open a [github issue](https://github.com/hoishing/pipable/issues) or ping me on 
 [coverage-url]: https://hoishing.github.io/pipable/assets/coverage/
 [MIT-badge]: https://img.shields.io/github/license/hoishing/pipable
 [MIT-url]: https://opensource.org/licenses/MIT
+[pypi-badge]: https://img.shields.io/pypi/v/pipable
+[pypi-url]: https://pypi.org/project/pipable/
+[black-badge]: https://img.shields.io/badge/code%20style-black-000000.svg
+[black-url]: https://github.com/psf/black
+[py-version]: https://img.shields.io/pypi/pyversions/pipable
+[py-url]: https://python.org
 [pipe]: https://pypi.org/project/pipe
 [coconut]: https://github.com/evhub/coconut

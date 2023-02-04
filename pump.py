@@ -73,4 +73,4 @@ if args.tag:
         print("will publish")
         getoutput(f"git push --tag")
         print(f"pushed tag {new_version} to github")
-        getoutput("./publish.sh now")
+        getoutput(f"./publish.sh {new_version}")

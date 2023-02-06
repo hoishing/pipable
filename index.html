@@ -13,7 +13,7 @@
         <link rel="next" href="reference/">
       
       <link rel="icon" href="https://api.iconify.design/mdi/pipe-disconnected.svg?color=white">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.9">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
     
     
       
@@ -282,8 +282,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-pipe-object-like-partial" class="md-nav__link">
-    Create Pipe Object Like Partial
+  <a href="#pipe-object-is-partial-with-infix-operator" class="md-nav__link">
+    Pipe Object is Partial with Infix Operator
   </a>
   
 </li>
@@ -437,8 +437,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-pipe-object-like-partial" class="md-nav__link">
-    Create Pipe Object Like Partial
+  <a href="#pipe-object-is-partial-with-infix-operator" class="md-nav__link">
+    Pipe Object is Partial with Infix Operator
   </a>
   
 </li>
@@ -516,25 +516,31 @@
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">list_</span> <span class="o">=</span> <span class="n">Pipe</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="s2">&quot;abc&quot;</span> <span class="o">|</span> <span class="n">list_</span>    <span class="c1"># [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]</span>
 </code></pre></div>
-<h4 id="create-pipe-object-like-partial">Create Pipe Object Like Partial</h4>
+<h4 id="pipe-object-is-partial-with-infix-operator">Pipe Object is Partial with Infix Operator</h4>
 <ul>
-<li>turn function into Pipe by providing argument values like using the built-in <code>functools.partial</code></li>
-<li>preceding output will be assigned to the first argument while piping</li>
+<li>at the core Pipe create partial function while overriding it's <code>|</code> operator</li>
+<li>instantiate Pipe object like the built-in <code>functools.partial</code></li>
+<li>preceding output will be assigned to the last positional argument of the Pipe object</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">square</span> <span class="o">=</span> <span class="n">Pipe</span><span class="p">(</span><span class="nb">pow</span><span class="p">,</span> <span class="n">exp</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="mi">3</span> <span class="o">|</span> <span class="n">square</span>    <span class="c1"># 9</span>
 </code></pre></div>
-<p>Note that assigning value to the first argument will raise exception, as it is preserved for the preceding output.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">base2</span> <span class="o">=</span> <span class="n">Pipe</span><span class="p">(</span><span class="nb">pow</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="mi">3</span> <span class="o">|</span> <span class="n">base2</span>    <span class="c1"># raise !!</span>
+<p>Since that Pipe appends preceding output to the last positional argument,
+assigning 1st argument with keyword will raise exception.
+This behave the same as <code>functools.partial</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">base2</span> <span class="o">=</span> <span class="n">Pipe</span><span class="p">(</span><span class="nb">pow</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># positional arg ok</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="mi">3</span> <span class="o">|</span> <span class="n">base2</span>    <span class="c1"># 8</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">base2</span> <span class="o">=</span> <span class="n">Pipe</span><span class="p">(</span><span class="nb">pow</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># keyword arg don&#39;t</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="mi">3</span> <span class="o">|</span> <span class="n">base2</span>    <span class="c1"># raise!!</span>
 </code></pre></div>
 <h3 id="using-decorator">Using Decorator</h3>
 <ul>
-<li>transform function to Pipe factory function with the <code>@Pipe</code> decorator</li>
-<li>preceding output will be assigned to the first argument</li>
-<li>instantiate Pipe object like creating partial by skipping the first argument</li>
+<li><code>@Pipe</code> decorator transforms function into Pipe object</li>
+<li>preceding output will be assigned to the last positional argument</li>
+<li>instantiate Pipe decorated function similar to creating partial</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># function with only one argument</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># only one argument</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nd">@Pipe</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">def</span> <span class="nf">hi</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;hi </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -542,32 +548,32 @@
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="s2">&quot;May&quot;</span> <span class="o">|</span> <span class="n">hi</span>    <span class="c1"># &quot;hi May&quot;</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1"># function with multiple arguments</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1"># multiple arguments</span>
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="nd">@Pipe</span>
 <a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="k">def</span> <span class="nf">power</span><span class="p">(</span><span class="n">base</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">exp</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>  <span class="k">return</span> <span class="n">a</span> <span class="o">**</span> <span class="n">b</span>
 <a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="c1"># instantiate Pipe obj by calling without the 1st argument</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="mi">2</span> <span class="o">|</span> <span class="n">power</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>        <span class="c1"># 8</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="mi">2</span> <span class="o">|</span> <span class="n">power</span><span class="p">(</span><span class="n">exp</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>    <span class="c1"># 8, better be more explicit with keyword</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="c1"># instantiate Pipe obj by partially calling the function</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="mi">2</span> <span class="o">|</span> <span class="n">power</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>        <span class="c1"># 9, note we need to use positional argument here</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="mi">2</span> <span class="o">|</span> <span class="n">power</span><span class="p">(</span><span class="n">exp</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>    <span class="c1"># 8, subsequent arguments can use keyword</span>
 <a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="c1"># assign the 1st argument will cause exception</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="c1"># assign the 1st argument with keyword will raise exception</span>
 <a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="mi">2</span> <span class="o">|</span> <span class="n">power</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>    <span class="c1"># raise !!</span>
 </code></pre></div>
 <h2 id="motivation">Motivation</h2>
 <p>Pipe operation is a handy feature in functional programming. It allows us to:</p>
 <ul>
-<li>write clearer and more readable code</li>
+<li>write more succinct and readable code</li>
 <li>create less variables</li>
-<li>easily create new functionality by chaining the output of other functions</li>
+<li>easily create new function by chaining other functions</li>
 </ul>
-<p>However it's still a missing feature in Python as of 2023. This package try to mimic pipe operation by overriding the bitwise-or operator, turn it into an infix function that take the output of previous expression as the first argument of the current function.</p>
-<p>There are packages, such as <a href="https://pypi.org/project/pipe">Pipe</a> take the similar approach. It treats pipe as iterator and work great with iterables. However, I simply want to take preceding expression as an input argument of a function then execute it. It leads to the creation of this package.</p>
+<p>However it's still a missing feature in Python as of 2023. This package try to mimic pipe operation by overriding the bitwise-or operator, and turn any function into pipable partial.</p>
+<p>There are packages, such as <a href="https://pypi.org/project/pipe">pipe 2</a> take the similar approach. It works great with iterables, and create pipe as iterator, ie. open pipe). However, I simply want to take preceding expression as an input argument of the current function then execute it, ie. close pipe. It leads to the creation of this package.</p>
 <h2 id="faq">FAQ</h2>
 <p>How can I assign value to the first argument?</p>
 <p>Assign it within a wrapper function</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">base2</span> <span class="o">=</span> <span class="n">Pipe</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="mi">3</span> <span class="o">|</span> <span class="n">base2</span>  <span class="c1"># 8</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">square</span> <span class="o">=</span> <span class="n">Pipe</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="mi">3</span> <span class="o">|</span> <span class="n">square</span>  <span class="c1"># 9</span>
 </code></pre></div>
 <hr />
 <p>Can I create open pipe?</p>
@@ -577,15 +583,19 @@
 <li><a href="https://github.com/evhub/coconut">Coconut</a>, a python variant that embrace functional programming</li>
 </ul>
 <hr />
-<p>Can I append the preceding output at the end of the argument list?</p>
-<p>Put the preceding output at the end using a wrapper function</p>
+<p>Can I append the preceding output at the beginning of the argument list?</p>
+<p>Put the preceding output as the 1st argument of a wrapper function</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># prepend is the default behaviour</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">prepend</span> <span class="o">=</span> <span class="n">Pipe</span><span class="p">(</span><span class="nb">print</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="s1">&#39;a&#39;</span> <span class="o">|</span> <span class="n">prepend</span>    <span class="c1"># &#39;a b c&#39;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">def</span> <span class="nf">kebab</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  <span class="k">return</span> <span class="s2">&quot;-&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># use wrapper if you need append</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">append</span> <span class="o">=</span> <span class="n">Pipe</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="mi">3</span> <span class="o">|</span> <span class="n">append</span>    <span class="c1"># &#39;1 2 3&#39;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="s1">&#39;a&#39;</span> <span class="o">|</span> <span class="n">Pipe</span><span class="p">(</span><span class="n">kebab</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>  <span class="c1"># &#39;b c a&#39;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="nd">@Pipe</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">others</span><span class="p">):</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>  <span class="k">return</span> <span class="n">kebab</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="o">*</span><span class="n">others</span><span class="p">)</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="s1">&#39;a&#39;</span> <span class="o">|</span> <span class="n">wrapper</span><span class="p">(</span><span class="n">others</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>  <span class="c1"># &#39;a b c&#39;</span>
 </code></pre></div>
 <h2 id="need-help">Need Help?</h2>
 <p>Open a <a href="https://github.com/hoishing/pipable/issues">github issue</a> or ping me on <a href="https://twitter.com/hoishing">Twitter</a> <img alt="" src="https://api.iconify.design/logos/twitter.svg?width=20" /></p>
@@ -629,7 +639,7 @@
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tracking", "navigation.expand"], "search": "assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.a00a7c5e.min.js"></script>
+      <script src="assets/javascripts/bundle.6df46069.min.js"></script>
       
     
   </body>

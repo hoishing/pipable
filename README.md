@@ -15,8 +15,8 @@
 ```python
 from pipable import Pipe
 
-list = Pipe(list)
-"abc" | list    # ["a", "b", "c"]
+list_ = Pipe(list)
+"abc" | list_    # ["a", "b", "c"]
 ```
 
 #### Create Pipe Object Like Partial

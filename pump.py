@@ -77,7 +77,7 @@ def main(section, tag, publish):
                 "coverage report",
                 # create html report for docs
                 "coverage html -d docs/assets/coverage",
-                "rm docs/assets/coverage/.gitignore",
+                "if [ -f docs/assets/coverage/.gitignore ]; then rm docs/assets/coverage/.gitignore; fi",
                 # not use `coverage.xml` to avoid ignore
                 "coverage xml -o docs/assets/coverage-report.xml",
                 # create coverage badge

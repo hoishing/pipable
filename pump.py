@@ -7,12 +7,12 @@
 - create new github commit, tag and release
 - publish new version to PyPi
 
-Examples: 
+Examples:
     - dry run
     ./pump.py patch
-    
+
     - update pyproject.toml and local git tag
-    ./pump.py patch --tag 
+    ./pump.py patch --tag
 
     - update everything and publish new version
     ./pump.py patch --tag --publish
@@ -51,19 +51,15 @@ def run(cmd: str) -> None:
     default=False,
 )
 def main(section, tag, publish):
-    # print(section, tag, publish)
+    """Version Pump Automation CLI"""
 
     # parse toml
     data = toml.load("pyproject.toml")
-    version = data["tool"]["poetry"]["version"]
-    ver_dict = {k: int(v) for k, v in zip(CHOICES, version.split("."))}
-
-    # pump version
-    ver_dict[section] += 1
-    new_version = reduce("{}.{}".format, ver_dict.values())
+    old_version = data["tool"]["poetry"]["version"]
+    new_version = upgrade_version(section, old_version)
     data["tool"]["poetry"]["version"] = new_version
 
-    print(version, "->", new_version)
+    print(old_version, "->", new_version)
 
     if tag:
         with open("pyproject.toml", "w") as f:
@@ -103,3 +99,33 @@ def main(section, tag, publish):
 
             for cmd in cmds:
                 run(cmd)
+
+
+def upgrade_version(section: str, old_version: str) -> str:
+    """upgrade new version from old version
+
+    Tests:
+        >>> upgrade_version('major', '0.1.1')
+        '1.0.0'
+
+        >>> upgrade_version('minor', '0.1.1')
+        '0.2.0'
+
+        >>> upgrade_version('patch', '0.1.1')
+        '0.1.2'
+    """
+    ver_dict = {k: int(v) for k, v in zip(CHOICES, old_version.split("."))}
+
+    # pump version
+    ver_dict[section] += 1
+
+    # reset sub-version num
+    match section:
+        case "minor":
+            ver_dict["patch"] = 0
+        case "major":
+            ver_dict["patch"] = 0
+            ver_dict["minor"] = 0
+
+    new_version = reduce("{}.{}".format, ver_dict.values())
+    return new_version

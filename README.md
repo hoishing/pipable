@@ -19,31 +19,37 @@ list_ = Pipe(list)
 "abc" | list_    # ["a", "b", "c"]
 ```
 
-#### Create Pipe Object Like Partial
+#### Pipe Object is Partial with Infix Operator
 
-- turn function into Pipe by providing argument values like using the built-in `functools.partial`
-- preceding output will be assigned to the first argument while piping
+- at the core Pipe create partial function while overriding it's `|` operator
+- instantiate Pipe object like the built-in `functools.partial`
+- preceding output will be assigned to the last positional argument of the Pipe object
 
 ```python
 square = Pipe(pow, exp=2)
 3 | square    # 9
 ```
 
-Note that assigning value to the first argument will raise exception, as it is preserved for the preceding output.
+Since that Pipe appends preceding output to the last positional argument,
+assigning 1st argument with keyword will raise exception.
+This behave the same as `functools.partial`
 
 ```python
-base2 = Pipe(pow, base=2)
-3 | base2    # raise !!
+base2 = Pipe(pow, 2)  # positional arg ok
+3 | base2    # 8
+
+base2 = Pipe(pow, base=2)  # keyword arg don't
+3 | base2    # raise!!
 ```
 
 ### Using Decorator
 
-- transform function to Pipe factory function with the `@Pipe` decorator
-- preceding output will be assigned to the first argument
-- instantiate Pipe object like creating partial by skipping the first argument
+- `@Pipe` decorator can transform function into Pipe object
+- preceding output will be assigned to the last positional argument
+- instantiate Pipe decorated function similar to creating partial
 
 ```python
-# function with only one argument
+# only one argument
 @Pipe
 def hi(name: str) -> str:
   return f"hi {name}"
@@ -51,16 +57,16 @@ def hi(name: str) -> str:
 "May" | hi    # "hi May"
 
 
-# function with multiple arguments
+# multiple arguments
 @Pipe
 def power(base: int, exp: int) -> int:
   return a ** b
 
-# instantiate Pipe obj by calling without the 1st argument
-2 | power(3)        # 8
-2 | power(exp=3)    # 8, better be more explicit with keyword
+# instantiate Pipe obj by partially calling the function
+2 | power(3)        # 9, note we need to use positional argument here
+2 | power(exp=3)    # 8, subsequent arguments can use keyword
 
-# assign the 1st argument will cause exception
+# assign the 1st argument with keyword will raise exception
 2 | power(base=3)    # raise !!
 ```
 
@@ -68,13 +74,13 @@ def power(base: int, exp: int) -> int:
 
 Pipe operation is a handy feature in functional programming. It allows us to:
 
-- write clearer and more readable code
+- write more succinct and readable code
 - create less variables
-- easily create new functionality by chaining the output of other functions
+- easily create new function by chaining other functions
 
-However it's still a missing feature in Python as of 2023. This package try to mimic pipe operation by overriding the bitwise-or operator, turn it into an infix function that take the output of previous expression as the first argument of the current function.
+However it's still a missing feature in Python as of 2023. This package try to mimic pipe operation by overriding the bitwise-or operator, and turn any function into pipable partial.
 
-There are packages, such as [Pipe][pipe] take the similar approach. It treats pipe as iterator and work great with iterables. However, I simply want to take preceding expression as an input argument of a function then execute it. It leads to the creation of this package.
+There are packages, such as [Pipe][pipe] take the similar approach. It works great with iterables, and create pipe as iterator, ie. open pipe). However, I simply want to take preceding expression as an input argument of the current function then execute it, ie. close pipe. It leads to the creation of this package.
 
 ## FAQ
 
@@ -83,8 +89,8 @@ How can I assign value to the first argument?
 Assign it within a wrapper function
 
 ```python
-base2 = Pipe(lambda x: pow(2, x))
-3 | base2  # 8
+square = Pipe(lambda x: pow(x, 2))
+3 | square  # 9
 ```
 
 ---
@@ -98,18 +104,22 @@ Can I create open pipe?
 
 ---
 
-Can I append the preceding output at the end of the argument list?
+Can I append the preceding output at the beginning of the argument list?
 
-Put the preceding output at the end using a wrapper function
+Put the preceding output as the 1st argument of a wrapper function
 
 ```python
 # prepend is the default behaviour
-prepend = Pipe(print, 'b', 'c')
-'a' | prepend    # 'a b c'
+def kebab(*args):
+  return "-".join(*args)
 
-# use wrapper if you need append
-append = Pipe(lambda x: print(1, 2, x))
-3 | append    # '1 2 3'
+'a' | Pipe(kebab, 'b', 'c')  # 'b c a'
+
+@Pipe
+def wrapper(first, others):
+  return kebab(first, *others)
+
+'a' | wrapper(others=['b', 'c'])  # 'a b c'
 ```
 
 ## Need Help?

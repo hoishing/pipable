@@ -44,7 +44,7 @@ base2 = Pipe(pow, base=2)  # keyword arg don't
 
 ### Using Decorator
 
-- `@Pipe` decorator can transform function into Pipe object
+- `@Pipe` decorator transforms function into Pipe object
 - preceding output will be assigned to the last positional argument
 - instantiate Pipe decorated function similar to creating partial
 
@@ -80,7 +80,7 @@ Pipe operation is a handy feature in functional programming. It allows us to:
 
 However it's still a missing feature in Python as of 2023. This package try to mimic pipe operation by overriding the bitwise-or operator, and turn any function into pipable partial.
 
-There are packages, such as [Pipe][pipe] take the similar approach. It works great with iterables, and create pipe as iterator, ie. open pipe). However, I simply want to take preceding expression as an input argument of the current function then execute it, ie. close pipe. It leads to the creation of this package.
+There are packages, such as [pipe 2][pipe] take the similar approach. It works great with iterables, and create pipe as iterator, ie. open pipe). However, I simply want to take preceding expression as an input argument of the current function then execute it, ie. close pipe. It leads to the creation of this package.
 
 ## FAQ
 

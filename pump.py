@@ -91,10 +91,8 @@ def main(section, tag, publish):
                 "rm -rf dist/*",
                 # build and publish to pypi
                 "poetry publish --build",
-                f"echo {new_version} published to PyPi",
                 # update github release to the current tag
-                "gh release create $(git describe --tags --abbrev=0) ./dist/*"
-                f"echo github release pumped to {new_version}",
+                "gh release create $(git describe --tags --abbrev=0) --generate-notes ./dist/*",
             ]
 
             for cmd in cmds:

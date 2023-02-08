@@ -15,8 +15,8 @@
 ```python
 from pipable import Pipe
 
-list_ = Pipe(list)
-"abc" | list_    # ["a", "b", "c"]
+list = Pipe(list)
+"abc" | list    # ["a", "b", "c"]
 ```
 
 #### Pipe Object is Partial with Infix Operator

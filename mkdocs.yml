@@ -1,9 +1,13 @@
 site_name: Pipable
 
 repo_url: https://github.com/hoishing/pipable
+extra_css:
+  - stylesheets/extra.css
 
 theme:
   name: "material"
+  font:
+    text: Varela Round
   icon:
     repo: fontawesome/brands/github
   favicon: https://api.iconify.design/mdi/pipe-disconnected.svg?color=white

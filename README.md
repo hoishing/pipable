@@ -70,6 +70,28 @@ def power(base: int, exp: int) -> int:
 2 | power(base=3)    # raise !!
 ```
 
+### Passing Variable Length Arguments
+
+- use `>>` operator to pass-in var length arguments
+
+```python
+@Pipe
+def kebab(*args):
+    return "-".join(args)
+
+["a", "b"] >> kebab   # "a-b"
+```
+
+- use `<<` operator to pass var length keyword arguments
+
+```python
+@Pipe
+def concat(**kwargs):
+    return ", ".join([f"{k}-{v}" for k, v in kwargs.items()])
+
+dict(b="boy", c="cat") << concat    # "b-boy, c-cat"
+```
+
 ## Motivation
 
 Pipe operation is a handy feature in functional programming. It allows us to:

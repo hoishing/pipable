@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.3.0 (2023-02-10)
+
+#### New Features
+
+- support precedent passing var len args/kwargs by >> and <<
+
+#### Fixes
+
+- pump release to github
+
+#### Docs
+
+- beautify mkdocs
+
+#### Others
+
+- update changelog, version pump
+
+Full set of changes: [`0.2.0...0.3.0`](https://github.com/hoishing/pipable/compare/0.2.0...0.3.0)
+
 ## 0.2.0 (2023-02-07)
 
 #### New Features

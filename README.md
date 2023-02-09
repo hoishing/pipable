@@ -1,8 +1,8 @@
 # pipable
 
-> pseudo pipe operation in python
+[![ci-badge]][ci-url] [![coverage-badge]][coverage-url] [![pypi-badge]][pypi-url] ![py-ver-badge] [![MIT-badge]][MIT-url] [![black-badge]][black-url]
 
-[![ci-badge]][ci-url] [![coverage-badge]][coverage-url] [![pypi-badge]][pypi-url] [![py-version]][py-url] [![MIT-badge]][MIT-url] [![black-badge]][black-url]
+> pipe operation in python
 
 🔗 [source code](https://github.com/hoishing/pipable)
 
@@ -80,7 +80,7 @@ Pipe operation is a handy feature in functional programming. It allows us to:
 
 However it's still a missing feature in Python as of 2023. This package try to mimic pipe operation by overriding the bitwise-or operator, and turn any function into pipable partial.
 
-There are packages, such as [pipe 2][pipe] take the similar approach. It works great with iterables, and create pipe as iterator, ie. open pipe). However, I simply want to take preceding expression as an input argument of the current function then execute it, ie. close pipe. It leads to the creation of this package.
+There are packages, such as [pipe] take the similar approach. It works great with iterables, and create pipe as iterator, ie. open pipe). However, I simply want to take preceding expression as an input argument of the current function then execute it, ie. close pipe. It leads to the creation of this package.
 
 ## FAQ
 
@@ -99,8 +99,8 @@ Can I create open pipe?
 
 `Pipe` only create closed pipe, ie. execute the function after piping with the `|` operator. You may consider other solutions such as:
 
-- [pipe][pipe], which create open pipe for iterators
-- [Coconut][coconut], a python variant that embrace functional programming
+- [pipe], which create open pipe for iterators
+- [Coconut], a python variant that embrace functional programming
 
 ---
 
@@ -124,8 +124,11 @@ def wrapper(first, others):
 
 ## Need Help?
 
-Open a [github issue](https://github.com/hoishing/pipable/issues) or ping me on [Twitter](https://twitter.com/hoishing) ![](https://api.iconify.design/logos/twitter.svg?width=20)
+Open a [github issue] or ping me on [Twitter ![twitter-icon]][Twitter]
 
+[github issue]: https://github.com/hoishing/pipable/issues
+[Twitter]: https://twitter.com/hoishing
+[twitter-icon]: https://api.iconify.design/logos/twitter.svg?width=20
 [ci-badge]: https://github.com/hoishing/pipable/actions/workflows/ci.yml/badge.svg
 [ci-url]: https://github.com/hoishing/pipable/actions/workflows/ci.yml
 [coverage-badge]: https://hoishing.github.io/pipable/assets/coverage-badge.svg
@@ -136,7 +139,6 @@ Open a [github issue](https://github.com/hoishing/pipable/issues) or ping me on 
 [pypi-url]: https://pypi.org/project/pipable/
 [black-badge]: https://img.shields.io/badge/code%20style-black-000000.svg
 [black-url]: https://github.com/psf/black
-[py-version]: https://img.shields.io/pypi/pyversions/pipable
-[py-url]: https://python.org
+[py-ver-badge]: https://img.shields.io/pypi/pyversions/pipable
 [pipe]: https://pypi.org/project/pipe
-[coconut]: https://github.com/evhub/coconut
+[Coconut]: https://github.com/evhub/coconut

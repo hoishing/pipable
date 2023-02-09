@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.3.1 (2023-02-10)
+
+#### Docs
+
+- README add var len arg section
+
+#### Others
+
+- update changelog, version pump
+
+Full set of changes: [`0.3.0...0.3.1`](https://github.com/hoishing/pipable/compare/0.3.0...0.3.1)
+
 ## 0.3.0 (2023-02-10)
 
 #### New Features

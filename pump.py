@@ -71,7 +71,7 @@ def main(section, tag, publish):
         # publish to pypi, update github release, commit changelog
         if publish:
             cmds = [
-                "git push --tag",
+                "git push --tag -f",
                 # run test w/ coverage
                 "coverage run -m pytest --doctest-modules",
                 "coverage report",

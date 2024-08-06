@@ -1,10 +1,10 @@
 # pipable
 
-[![ci-badge]][ci-url] [![coverage-badge]][coverage-url] [![pypi-badge]][pypi-url] ![py-ver-badge] [![MIT-badge]][MIT-url] [![black-badge]][black-url]
+[![ci-badge]][ci-url] [![pypi-badge]][pypi-url] [![MIT-badge]][MIT-url] [![black-badge]][black-url]
 
 > pipe operation in python
 
-🔗 [source code](https://github.com/hoishing/pipable)
+- [docs](https://hoishing.github.io/pipable) 
 
 ## Quick Start
 
@@ -153,14 +153,11 @@ Open a [github issue] or ping me on [Twitter ![twitter-icon]][Twitter]
 [twitter-icon]: https://api.iconify.design/logos/twitter.svg?width=20
 [ci-badge]: https://github.com/hoishing/pipable/actions/workflows/ci.yml/badge.svg
 [ci-url]: https://github.com/hoishing/pipable/actions/workflows/ci.yml
-[coverage-badge]: https://hoishing.github.io/pipable/assets/coverage-badge.svg
-[coverage-url]: https://hoishing.github.io/pipable/assets/coverage/
 [MIT-badge]: https://img.shields.io/github/license/hoishing/pipable
 [MIT-url]: https://opensource.org/licenses/MIT
 [pypi-badge]: https://img.shields.io/pypi/v/pipable
 [pypi-url]: https://pypi.org/project/pipable/
 [black-badge]: https://img.shields.io/badge/code%20style-black-000000.svg
 [black-url]: https://github.com/psf/black
-[py-ver-badge]: https://img.shields.io/pypi/pyversions/pipable
 [pipe]: https://pypi.org/project/pipe
 [Coconut]: https://github.com/evhub/coconut

@@ -13,7 +13,7 @@
         <link rel="next" href="reference/">
       
       
-      <link rel="icon" href="https://api.iconify.design/mdi/pipe-disconnected.svg?color=white">
+      <link rel="icon" href="assets/favicon.png">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
     
     
@@ -122,7 +122,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
@@ -132,10 +132,20 @@
     
     
     
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1M8 13h8v-2H8v2m9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1 0 1.71-1.39 3.1-3.1 3.1h-4V17h4a5 5 0 0 0 5-5 5 5 0 0 0-5-5Z"/></svg>
       </label>
     
   
@@ -576,14 +586,11 @@
   
 
 
-<h1 id="pipable">pipable</h1>
+<h1 id="pipable">Pipable</h1>
 <p><a href="https://github.com/hoishing/pipable/actions/workflows/ci.yml"><img alt="ci-badge" src="https://github.com/hoishing/pipable/actions/workflows/ci.yml/badge.svg" /></a> <a href="https://pypi.org/project/pipable/"><img alt="pypi-badge" src="https://img.shields.io/pypi/v/pipable" /></a> <a href="https://opensource.org/licenses/MIT"><img alt="MIT-badge" src="https://img.shields.io/github/license/hoishing/pipable" /></a> <a href="https://github.com/psf/black"><img alt="black-badge" src="https://img.shields.io/badge/code%20style-black-000000.svg" /></a></p>
 <blockquote>
 <p>pipe operation in python</p>
 </blockquote>
-<ul>
-<li><a href="https://hoishing.github.io/pipable">docs</a> </li>
-</ul>
 <h2 id="quick-start">Quick Start</h2>
 <h3 id="create-the-pipe-object">Create the Pipe Object</h3>
 <ul>
@@ -657,6 +664,9 @@ This behave the same as <code>functools.partial</code></p>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="nb">dict</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="s2">&quot;boy&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">concat</span>    <span class="c1"># &quot;b-boy, c-cat&quot;</span>
 </code></pre></div>
+<ul>
+<li>refer the <a href="https://hoishing.github.io/pipable/reference">docs</a> for details</li>
+</ul>
 <h2 id="motivation">Motivation</h2>
 <p>Pipe operation is a handy feature in functional programming. It allows us to:</p>
 <ul>
@@ -668,7 +678,7 @@ This behave the same as <code>functools.partial</code></p>
 <p>There are packages, such as <a href="https://pypi.org/project/pipe">pipe</a> take the similar approach. It works great with iterables, and create pipe as iterator, ie. open pipe). However, I simply want to take preceding expression as an input argument of the current function then execute it, ie. close pipe. It leads to the creation of this package.</p>
 <h2 id="faq">FAQ</h2>
 <p>How can I assign value to the first argument?</p>
-<p>Assign it within a wrapper function</p>
+<p>use a wrapper function</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">square</span> <span class="o">=</span> <span class="n">Pipe</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="mi">3</span> <span class="o">|</span> <span class="n">square</span>  <span class="c1"># 9</span>
 </code></pre></div>
@@ -695,7 +705,8 @@ This behave the same as <code>functools.partial</code></p>
 <a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="s1">&#39;a&#39;</span> <span class="o">|</span> <span class="n">wrapper</span><span class="p">(</span><span class="n">others</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>  <span class="c1"># &#39;a b c&#39;</span>
 </code></pre></div>
 <h2 id="need-help">Need Help?</h2>
-<p>Open a <a href="https://github.com/hoishing/pipable/issues">github issue</a> or ping me on <a href="https://twitter.com/hoishing">Twitter <img alt="twitter-icon" src="https://api.iconify.design/logos/twitter.svg?width=20" /></a></p>
+<p><a href="https://github.com/hoishing/pipable/issues"><img alt="git-logo" src="https://api.iconify.design/bi/github.svg?color=%236FD886&amp;width=20" /> github issue</a></p>
+<p><a href="https://x.com/hoishing"><img alt="x-logo" src="https://api.iconify.design/ri:twitter-x-fill.svg?width=20&amp;color=DarkGray" /> posts</a></p>
 
 
 

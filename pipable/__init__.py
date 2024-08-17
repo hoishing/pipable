@@ -19,8 +19,6 @@ class Pipe(object):
 
         Args:
             func (Callable): func to be pipable
-            args: partial's positional args
-            kwargs: partial's keyword args
         """
         self.pipe = partial(func, *args, **kwargs)
 

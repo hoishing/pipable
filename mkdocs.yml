@@ -2,57 +2,65 @@ site_name: Pipable
 
 repo_url: https://github.com/hoishing/pipable
 extra_css:
-  - stylesheets/extra.css
+    - stylesheets/extra.css
 
 theme:
-  name: "material"
-  font:
-    text: Varela Round
-  icon:
-    repo: fontawesome/brands/github
-  favicon: https://api.iconify.design/mdi/pipe-disconnected.svg?color=white
-  logo: https://api.iconify.design/mdi/pipe-disconnected.svg?color=white
-  palette:
-    # Palette toggle for dark mode
-    - primary: deep purple
-      scheme: slate
-      toggle:
-        icon: material/toggle-switch-off-outline
-        name: Switch to light mode
+    name: "material"
+    font:
+        text: Varela Round
+    icon:
+        repo: fontawesome/brands/github
+    favicon: assets/favicon.png
+    logo: https://api.iconify.design/mdi/pipe-disconnected.svg?color=white
+    palette:
+        # Palette toggle for dark mode
+        - media: "(prefers-color-scheme: dark)"
+          primary: deep purple
+          scheme: slate
+          toggle:
+              icon: material/toggle-switch-off-outline
+              name: Switch to light mode
 
-    # Palette toggle for light mode
-    - primary: deep purple
-      scheme: default
-      toggle:
-        icon: material/toggle-switch
-        name: Switch to dark mode
+        # Palette toggle for light mode
+        - media: "(prefers-color-scheme: light)"
+          primary: deep purple
+          scheme: default
+          toggle:
+              icon: material/toggle-switch
+              name: Switch to system preference
 
-  features:
-    - navigation.instant
-    - navigation.tracking
-    # - navigation.sections
-    - navigation.expand
-    # - toc.integrate
+        # Palette toggle for automatic mode
+        - media: "(prefers-color-scheme)"
+          toggle:
+              icon: material/link
+              name: Switch to dark mode
+
+    features:
+        - navigation.instant
+        - navigation.tracking
+        # - navigation.sections
+        - navigation.expand
+        # - toc.integrate
 
 plugins:
-  - search:
-      lang: en
-  - mkdocstrings:
-      handlers:
-        python:
-          options:
-            show_root_heading: true
-            show_signature_annotations: true
+    - search:
+          lang: en
+    - mkdocstrings:
+          handlers:
+              python:
+                  options:
+                      show_root_heading: true
+                      show_signature_annotations: true
 
 markdown_extensions:
-  - pymdownx.highlight:
-      anchor_linenums: true
-  - pymdownx.inlinehilite
-  - pymdownx.superfences
-  - pymdownx.snippets
+    - pymdownx.highlight:
+          anchor_linenums: true
+    - pymdownx.inlinehilite
+    - pymdownx.superfences
+    - pymdownx.snippets
 
 nav:
-  - Quick Start: index.md
-  - References: reference.md
-  - License: license.md
-  - Author: https://hoishing.github.io
+    - Quick Start: index.md
+    - References: reference.md
+    - License: license.md
+    - Author: https://hoishing.github.io

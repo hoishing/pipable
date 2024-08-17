@@ -1,10 +1,8 @@
-# pipable
+# Pipable
 
 [![ci-badge]][ci-url] [![pypi-badge]][pypi-url] [![MIT-badge]][MIT-url] [![black-badge]][black-url]
 
 > pipe operation in python
-
-- [docs](https://hoishing.github.io/pipable) 
 
 ## Quick Start
 
@@ -92,6 +90,8 @@ def concat(**kwargs):
 dict(b="boy", c="cat") << concat    # "b-boy, c-cat"
 ```
 
+- refer the [docs](https://hoishing.github.io/pipable/reference) for details
+
 ## Motivation
 
 Pipe operation is a handy feature in functional programming. It allows us to:
@@ -108,7 +108,7 @@ There are packages, such as [pipe] take the similar approach. It works great wit
 
 How can I assign value to the first argument?
   
-Assign it within a wrapper function
+use a wrapper function
 
 ```python
 square = Pipe(lambda x: pow(x, 2))
@@ -146,18 +146,21 @@ def wrapper(first, others):
 
 ## Need Help?
 
-Open a [github issue] or ping me on [Twitter ![twitter-icon]][Twitter]
+[![git-logo] github issue][github issue]
 
-[github issue]: https://github.com/hoishing/pipable/issues
-[Twitter]: https://twitter.com/hoishing
-[twitter-icon]: https://api.iconify.design/logos/twitter.svg?width=20
-[ci-badge]: https://github.com/hoishing/pipable/actions/workflows/ci.yml/badge.svg
-[ci-url]: https://github.com/hoishing/pipable/actions/workflows/ci.yml
-[MIT-badge]: https://img.shields.io/github/license/hoishing/pipable
-[MIT-url]: https://opensource.org/licenses/MIT
-[pypi-badge]: https://img.shields.io/pypi/v/pipable
-[pypi-url]: https://pypi.org/project/pipable/
+[![x-logo] posts][x-post]
+
 [black-badge]: https://img.shields.io/badge/code%20style-black-000000.svg
 [black-url]: https://github.com/psf/black
-[pipe]: https://pypi.org/project/pipe
+[ci-badge]: https://github.com/hoishing/pipable/actions/workflows/ci.yml/badge.svg
+[ci-url]: https://github.com/hoishing/pipable/actions/workflows/ci.yml
 [Coconut]: https://github.com/evhub/coconut
+[git-logo]: https://api.iconify.design/bi/github.svg?color=%236FD886&width=20
+[github issue]: https://github.com/hoishing/pipable/issues
+[MIT-badge]: https://img.shields.io/github/license/hoishing/pipable
+[MIT-url]: https://opensource.org/licenses/MIT
+[pipe]: https://pypi.org/project/pipe
+[pypi-badge]: https://img.shields.io/pypi/v/pipable
+[pypi-url]: https://pypi.org/project/pipable/
+[x-logo]: https://api.iconify.design/ri:twitter-x-fill.svg?width=20&color=DarkGray
+[x-post]: https://x.com/hoishing

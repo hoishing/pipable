@@ -25,7 +25,7 @@ jobs:
           cache: "poetry"
 
       - run: |
-          poetry install
+          poetry install --with=dev
           echo "$GITHUB_WORKSPACE/.venv/bin" >> $GITHUB_PATH
 
       - run: pytest

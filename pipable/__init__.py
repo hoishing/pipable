@@ -32,7 +32,7 @@ class Pipe(object):
         return self.pipe(*precedent)
 
     def __rlshift__(self, precedent: dict):
-        """override the builit-in `>>=` operator, pass as destructured dict to the pipe"""
+        """override the builit-in `<<` operator, pass as destructured dict to the pipe"""
         return self.pipe(**precedent)
 
     def __call__(self, *args, **kwargs):

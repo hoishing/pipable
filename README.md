@@ -21,7 +21,7 @@ list = Pipe(list)
 
 - at the core Pipe create partial function while overriding it's `|` operator
 - instantiate Pipe object like the built-in `functools.partial`
-- preceding output will be assigned to the last positional argument of the Pipe object
+- preceding output will be assigned to the **last positional** argument of the Pipe object
 
 ```python
 square = Pipe(pow, exp=2)
@@ -58,7 +58,7 @@ def hi(name: str) -> str:
 # multiple arguments
 @Pipe
 def power(base: int, exp: int) -> int:
-  return a ** b
+  return base ** exp
 
 # instantiate Pipe obj by partially calling the function
 2 | power(3)        # 9, note we need to use positional argument here
@@ -70,7 +70,7 @@ def power(base: int, exp: int) -> int:
 
 ### Passing Variable Length Arguments
 
-- use `>>` operator to pass-in var length arguments
+- use `>>` operator to pass-in variable length arguments
 
 ```python
 @Pipe
@@ -80,7 +80,7 @@ def kebab(*args):
 ["a", "b"] >> kebab   # "a-b"
 ```
 
-- use `<<` operator to pass var length keyword arguments
+- use `<<` operator to pass variable length keyword arguments
 
 ```python
 @Pipe

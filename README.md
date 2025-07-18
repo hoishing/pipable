@@ -4,6 +4,11 @@
 
 > pipe operation in python
 
+---
+
+> [!NOTE]
+> This repository has been archived. While being able to chain function calls with a pipe operator looks handy and more "functional", the trade-off of breaking normal Python coding style outweighed the benefits of the syntactic sugar, especially when working with LLMs. Keeping to the conventional way of writing code is friendlier to LLMs and human readers, and thus enhances productivity.
+
 ## Quick Start
 
 ### Create the Pipe Object
